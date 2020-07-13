@@ -5,19 +5,14 @@ class Node:
 
 
 class LinkedList:
-    def __init__(self, head = None):
-        self.head = head
-        self.tail = head
+    def __init__(self, node = None):
+        self.head = node
+        self.tail = node
+        self.length = 1 if node is not None else 0
 
 
     def __len__(self):
-        if(self.head):
-            current = self.head
-            i = 1
-            while(current):
-                current = current.next
-                i += 1
-            return i
+        return self.length
 
     def add_to_tail(self, value):
         newNode = Node(value) 
@@ -25,6 +20,8 @@ class LinkedList:
             current = self.tail
             while(current.next):
                 current = current.next
+            if current.next == None:
+                print('hello')
             current.next = newNode
             self.tail = newNode
         else:
@@ -50,6 +47,14 @@ class LinkedList:
             return current
 
 
+    def printLL(self):
+        current = self.head
+        while(current):
+            print(current.value)
+            current = current.next
+            
+
+
 
 
 
@@ -62,5 +67,11 @@ print('test 2')
 LL.printLL()
 LL.add_to_tail(5)
 print('test 3')
+LL.printLL()
+LL.add_to_tail(5)
+print('test 4')
+LL.printLL()
+LL.add_to_tail(5)
+print('test 5')
 LL.printLL()
 
