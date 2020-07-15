@@ -51,10 +51,7 @@ class BSTNode:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        root = self
-        unexplored = []
-        if root:
-            unexplored.append(root)
+        unexplored = [self]
         current = unexplored[0]
         while unexplored and current.value != target:
             current = unexplored.pop(0)
@@ -80,14 +77,10 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        root = self
-        unexplored = []
-        if root:
-            unexplored.append(root)
-        current = unexplored[0]
+        unexplored = [self]
         while unexplored:
-            fn(current.value)
             current = unexplored.pop(0)
+            fn(current.value)
             if current.left:
                 unexplored.append(current.left)
             if current.right:
@@ -99,25 +92,52 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node:
+            self.in_order_print(node.left)
+            print(node.value)
+            self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        unexplored = [node]
+        while unexplored:
+            current = unexplored.pop(0)
+            print(current.value)
+            if current.left:
+                unexplored.append(current.left)
+            if current.right:
+                unexplored.append(current.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        unexplored = [node]
+        while unexplored:
+            current = unexplored.pop()
+            print(current.value)
+            if current.right:
+                unexplored.append(current.right)
+            if current.left:
+                unexplored.append(current.left)
+            
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        if node:
+            print(node.value)
+            self.pre_order_dft(node.left)
+            self.pre_order_dft(node.right)
+            
+
+
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if node:
+            self.post_order_dft(node.left)
+            self.post_order_dft(node.right)
+            print(node.value)
