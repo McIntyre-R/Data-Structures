@@ -50,6 +50,9 @@ class DoublyLinkedList:
             current = self.head
             if self.head == self.tail:
                 self.tail = None
+            if current.next:
+                after = current.next
+                after.previous = None
             self.head = current.next
             self.length -= 1
             return current.value
@@ -97,7 +100,6 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
-        # current = node
         current = self.head
         while current != node:
             current = current.next
